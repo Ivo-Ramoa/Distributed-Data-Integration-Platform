@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package tp3;
+
+message Empty {}
+
+message Ativo {
+  string ticker = 1;
+  string tipo = 2;
+  double preco = 3;
+  int64 volume = 4;
+}
+
+message AggItem {
+  string tipo = 1;
+  int32 total = 2;
+}
+
+message TopRequest {
+  int32 limit = 1;
+}
+
+message AtivosResponse {
+  repeated Ativo ativos = 1;
+}
+
+message AggResponse {
+  repeated AggItem agg = 1;
+}
+
+message TopResponse {
+  repeated Ativo top = 1;
+}
+
+service Tp3Service {
+  rpc Ping(Empty) returns (Empty);
+  rpc GetAtivos(Empty) returns (AtivosResponse);
+  rpc GetAggCategory(Empty) returns (AggResponse);
+  rpc GetTopVolume(TopRequest) returns (TopResponse);
+}
